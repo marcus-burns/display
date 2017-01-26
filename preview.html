@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Preview page</title>
+		<style type="text/css">
+		
+			iframe {
+			  border:none;
+			  padding: 25px;
+			} 
+
+			a:link, a:visited {
+			    background-color: #cccccc;
+			    color: white;
+			    padding: 12px 25px;
+			    text-align: center; 
+			    text-decoration: none;
+			    display: inline-block;
+			    font-family: Arial, Helvetica, sans-serif;
+			    font-size: 85%;
+			}
+			
+			p{
+				font-family: Arial, Helvetica, sans-serif;
+			    font-size: 85%;
+				border:solid 1px #ededed; 
+				padding:10px;	
+				background-color:#fafafa;	
+				color:#bbbbbb;		
+			}
+				
+				
+									
+			.banner{    			
+			}
+			
+			.bordr{    			
+			}
+						
+			.refresh{
+				font-family: Arial, Helvetica, sans-serif;
+			    font-size: 75%;
+				border:solid 1px #ededed; 
+				padding:0px;	
+				background-color:#fafafa;	
+				color:#bbbbbb;	
+				cursor:pointer;	
+				margin:0px;
+				width:100px;
+				text-align:center;
+			}
+			
+			
+		</style>
+
+	</head>
+
+	<body style="background-color:#fefefe; ">
+
+		<a href="Archive.zip">Download files</a>
+
+		<div id="d00" style="padding:10px; ">
+			<!--<iframe src="300x250/index.html" width="300" height="250"></iframe>
+			<iframe src="728x90/index.html" width="728" height="90"></iframe>
+			<iframe src="160x600/index.html" width="160" height="600"></iframe>
+			<iframe src="300x600/index.html" width="300" height="600"></iframe>
+			<iframe src="970x250/index.html" width="970" height="250"></iframe>-->
+
+			<div id="d01" style="position:relative; width:300px; height:250px; top:0px;" class="banner">
+            	<p style="top:0px; width:278px; height:228px;">300x250 banner will display here if available</p>                   
+				<div id="banner01" style="width:300px; height:250px; top:0px; position:absolute"/>	    
+			</div>
+
+			<div align="right">
+			 <p class="refresh" onClick="load01()">Refresh</p>
+			</div>
+            
+			<div id="d02" style="position:relative; width:728px; height:90px;" class="banner">
+            	<p style="top:0px; width:706px; height:68px;">728x90 banner will display here if available</p>
+				<div id="banner02" style="width:728px; height:90px; top:0px; position:absolute" />
+			</div>
+
+			<div align="right">
+			 <p class="refresh" onClick="load02()">Refresh</p>
+			</div>
+
+			<div id="d03" style="position:relative; width:160px; height:600px; top:0px;" class="banner">
+            	<p style="top:0px; width:138px; height:578px;">160x600 banner will display here if available</p>
+				<div id="banner03" style="width:160px; height:600px; top:0px; position:absolute" />
+			</div>
+
+			<div align="right">
+			 <p class="refresh" onClick="load03()">Refresh</p>
+			</div>
+
+			<div id="d04" style="position:relative; width:300px; height:600px; top:0;" class="banner">
+            	<p style="top:0px; width:278px; height:578px;">300x600 banner will display here if available</p>
+				<div id="banner04" style="width:300px; height:600px; top:0px; position:absolute" />
+			</div>
+
+			<div align="right">
+			 <p class="refresh" onClick="load04()">Refresh</p>
+			</div>
+
+			<div id="d05" style="position:relative; width:970px; height:250px; top:0px;" class="banner">
+            	<p style="top:0px; width:948px; height:228px;">970x250 banner will display here if available</p>
+				<div id="banner05" style="width:970px; height:250px; top:0px; position:absolute" />
+			</div>
+
+			<div align="right">
+			 <p class="refresh" onClick="load05()">Refresh</p>
+			</div>
+
+			<br>
+
+		</div>
+
+		<script type="text/javascript">
+
+			setTimeout(load01, 100);
+
+			setTimeout(load02, 200);
+			 
+			setTimeout(load03, 300);
+
+			setTimeout(load04, 400);
+
+			setTimeout(load05, 500);
+
+
+			function load01() {
+				document.getElementById("banner01").innerHTML='<object type="text/html" style="width:300px; height:250px;" data="300x250/index.html" ></object>';
+			}
+			function load02() {
+				document.getElementById("banner02").innerHTML='<object type="text/html" style="width:728px; height:90px;" data="728x90/index.html" ></object>';
+			}
+			function load03() {
+				document.getElementById("banner03").innerHTML='<object type="text/html" style="width:160px; height:600px;" data="160x600/index.html" ></object>';
+			}
+			function load04() {
+				document.getElementById("banner04").innerHTML='<object type="text/html" style="width:300px; height:600px;" data="300x600/index.html" ></object>';
+			}
+			function load05() {
+				document.getElementById("banner05").innerHTML='<object type="text/html" style="width:970px; height:250px;" data="970x250/index.html" ></object>';
+			}
+
+		</script>
+
+	</body>
+
+</html>
