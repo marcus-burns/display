@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dyson_160x600_D</title>
+    <meta name="ad.size" content="width=160, height=600">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="main.css"/>
+    <script type="text/javascript">
+        var clickTag = "http://www.google.com"; 
+    </script>
+</head>
+<body>
+    <div class="content" id="content">
+    <a href="javascript:void(window.open(window.clickTag))">
+        <div id="intro-product"></div>
+        <div id="intro-product-2"></div>
+        <div id="cta"></div>
+        <div id="text"></div>
+        <div id="logo"></div>
+        <div id="end-product"></div>
+    </a>
+	</div>
+
+
+    <script type="text/javascript">
+    (function () {
+    	var content = document.getElementById('content');
+
+        var introProduct = document.getElementById('intro-product');
+        var introProduct2 = document.getElementById('intro-product-2');
+        var cta = document.getElementById('cta');
+        var text = document.getElementById('text');
+        var logo = document.getElementById('logo');
+        var endProduct = document.getElementById('end-product');
+
+        var elems = [introProduct, introProduct2, cta, text, logo, endProduct];
+
+        var t1,t2,t3,t4,t5;
+
+        function hasClass(elem, className) {
+            return new RegExp(' ' + className + ' ').test(' ' + elem.className + ' ');
+        }
+        function addClass(elem, className) {
+            if (!hasClass(elem, className)) {
+                elem.className += ' ' + className;
+            }
+        }
+        function removeClass(elem, className) {
+            var newClass = ' ' + elem.className.replace( /[\t\r\n]/g, ' ') + ' ';
+            if (hasClass(elem, className)) {
+                while (newClass.indexOf(' ' + className + ' ') >= 0 ) {
+                    newClass = newClass.replace(' ' + className + ' ', ' ');
+                }
+                elem.className = newClass.replace(/^\s+|\s+$/g, '');
+            }
+        }
+        function Timer(callback, delay) {
+            var timerId, start, remaining = delay;
+            this.pause = function() {
+                window.clearTimeout(timerId);
+                remaining -= new Date() - start;
+            };
+            this.resume = function() {
+                start = new Date();
+                window.clearTimeout(timerId);
+                timerId = window.setTimeout(callback, remaining);
+            };
+            this.stop = function() {
+                window.clearTimeout(timerId);
+            }
+            this.resume();
+        }
+        function pauseTimers(){
+			t1.pause();
+            t2.pause();
+            t3.pause();
+            t4.pause();
+            t5.pause();
+        }
+        function resumeTimers(){
+            t1.resume();
+            t2.resume();
+            t3.resume();
+            t4.resume();
+            t5.resume();
+        }
+        function pauseCss() {
+            for (var i=0;i<elems.length;i++){
+                elems[i].style.webkitAnimationPlayState="paused";
+                elems[i].style.animationPlayState="paused";
+            }
+        }
+        function resumeCss() {
+            for (var i=0;i<elems.length;i++){
+                elems[i].style.webkitAnimationPlayState="running";
+                elems[i].style.animationPlayState="running";
+            }
+        }
+        function visibilityExpanded() {
+            if (document.hidden) {     
+                    pauseTimers();
+                    pauseCss();
+                } else {
+                    resumeTimers();
+                    resumeCss();
+                } 
+        }
+        function run(){
+            t1 = new Timer(function(){
+                addClass(introProduct, 'intro-product-anim');
+            }, 100);
+            t2 = new Timer(function(){
+                introProduct2.style.display='block';
+                introProduct.style.display='none';
+                addClass(introProduct2, 'intro-product-anim-2');
+                addClass(logo, 'opacity-in');
+            }, 1600);
+            t3 = new Timer(function(){
+                addClass(endProduct, 'opacity-in');
+            }, 3600);
+            t4 = new Timer(function(){
+                addClass(text, 'opacity-in');
+            }, 4600);
+            t5 = new Timer(function(){
+                addClass(cta, 'opacity-in');
+            }, 5600);
+
+        }
+        function init(){
+            var version = Date.now();
+            introProduct2.style.background = 'url(assets/product.gif?v='+version+') no-repeat';
+            run();
+            content.addEventListener('click', function(){
+                Enabler.exit('defaultExit', clickTag);
+            }, false);
+            document.addEventListener("visibilitychange", visibilityExpanded, false);
+        };
+        window.onload = function(){
+    		init();
+    	}
+    })();
+    </script>
+</body>
+</html>

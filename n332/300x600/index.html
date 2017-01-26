@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>N332_D_300x600</title>
+
+<script src="https://s0.2mdn.net/ads/studio/cached_libs/easeljs_0.8.1_58add2e69ca7fbe25e8f82a2b5f6a510_min.js"></script>
+<script src="https://s0.2mdn.net/ads/studio/cached_libs/tweenjs_0.6.1_40840f08e9fb382ae9e4a337da542ed5_min.js"></script>
+<script src="https://s0.2mdn.net/ads/studio/cached_libs/movieclip_0.8.1_927f07f1635e6a2a1aa76e79f9decf86_min.js"></script>
+<script src="https://s0.2mdn.net/ads/studio/cached_libs/preloadjs_0.6.1_ab03d7dc94f6d4fae428f99662cd5819_min.js"></script>
+
+<script src="N332_D_300x600.js"></script>
+
+<script src="https://s0.2mdn.net/ads/studio/Enabler.js"> </script>
+  
+<script>// If true, start function. If false, listen for INIT.
+window.onload = function() {
+  if (Enabler.isInitialized()) {
+      enablerInitHandler();
+  } else {
+      Enabler.addEventListener(studio.events.StudioEvent.INIT,enablerInitHandler);
+  }
+}
+function enablerInitHandler() {
+    // Start ad, initialise animation, load in your image assets, call Enabler methods.
+    // Also, you can start the Polite Load.
+}
+function bgExitHandler(e) {
+      Enabler.exit('Background Exit');
+}
+</script>
+
+<script>
+var canvas, stage, exportRoot;
+
+function init() {
+	canvas = document.getElementById("canvas");
+	// CLICK DETECTOR //
+	canvas.addEventListener('click', bgExitHandler, false);
+	
+	images = images||{};
+
+	var loader = new createjs.LoadQueue(false);
+	loader.addEventListener("fileload", handleFileLoad);
+	loader.addEventListener("complete", handleComplete);
+	loader.loadManifest(lib.properties.manifest);
+}
+
+function handleFileLoad(evt) {
+	if (evt.item.type == "image") { images[evt.item.id] = evt.result; }
+}
+
+function handleComplete() {
+	exportRoot = new lib.N332_D_300x600();
+
+	stage = new createjs.Stage(canvas);
+	stage.addChild(exportRoot);
+	stage.update();
+
+	createjs.Ticker.setFPS(lib.properties.fps);
+	createjs.Ticker.addEventListener("tick", stage);
+}
+</script>
+</head>
+
+<body onload="init();" style="background-color:#D4D4D4" leftmargin="0px" topmargin="0px">
+	<canvas id="canvas" width="300" height="600" style="background-color:#FFFFFF; cursor:pointer;"></canvas>
+</body>
+</html>
