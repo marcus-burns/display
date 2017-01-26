@@ -30,13 +30,6 @@
 				color:#bbbbbb;		
 			}
 				
-				
-									
-			.banner{    			
-			}
-			
-			.bordr{    			
-			}
 						
 			.refresh{
 				font-family: Arial, Helvetica, sans-serif;
@@ -118,6 +111,21 @@
 
 		<script type="text/javascript">
 
+
+			function getParameterByName(name, url) {
+			if (!url) {
+			  url = window.location.href;
+			}
+			name = name.replace(/[\[\]]/g, "\\$&");
+			var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+				results = regex.exec(url);
+			if (!results) return null;
+			if (!results[2]) return '';
+			return decodeURIComponent(results[2].replace(/\+/g, " "));			
+			}
+
+			var banner = getParameterByName('banner');
+
 			load01();
 			load02();
 			load03();
@@ -125,7 +133,7 @@
 			load05();
 
 			function load01() {
-				document.getElementById("banner01").innerHTML='<object type="text/html" style="width:300px; height:250px;" data="300x250/index.html" ></object>';
+				document.getElementById("banner01").innerHTML='<object type="text/html" style="width:300px; height:250px;" data="' + banner + '/300x250/index.html" ></object>';
 			}
 			function load02() {
 				document.getElementById("banner02").innerHTML='<object type="text/html" style="width:728px; height:90px;" data="728x90/index.html" ></object>';
