@@ -51,7 +51,7 @@
 
 	<body style="background-color:#fefefe; ">
 
-		<a href="https://github.com/marcus-burns/display">Download files</a>
+		<a id="downloadBtn" href="https://github.com/marcus-burns/display">Download files</a>
 
 		<div id="d00" style="padding:10px; ">
 			<!--<iframe src="300x250/index.html" width="300" height="250"></iframe>
@@ -125,6 +125,14 @@
 			}
 
 			var banner = getParameterByName('banner');
+
+			console.log('banner: ' + banner);
+			
+			document.getElementById("downloadBtn").href = 'https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/marcus-burns/display/tree/master/' + banner;
+			
+			console.log('download URL: ' + document.getElementById("downloadBtn").href);
+			
+			//https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/marcus-burns/display/tree/master/728x90
 
 			load01();
 			load02();
