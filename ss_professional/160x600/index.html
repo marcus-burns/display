@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" name="ad.size" content="width=160,height=600">
+<title>Dyson</title>
+
+	<script src="https://s0.2mdn.net/ads/studio/Enabler.js"></script>
+    
+	<script>// If true, start function. If false, listen for INIT.
+    window.onload = function() {
+        
+      if (Enabler.isInitialized()) {
+          enablerInitHandler();
+      } else {
+          Enabler.addEventListener(studio.events.StudioEvent.INIT,enablerInitHandler);
+      }
+    }
+    
+    function enablerInitHandler() {
+        // Start ad, initialise animation, load in your image assets, call Enabler methods.
+        // Also, you can start the Polite Load.
+    }
+    
+    </script>
+
+</head>
+
+<body style="background-color:#ffffff; width:160px; height:600px; overflow:hidden; margin:0; padding:0;">
+
+<div id="banner" style="position:absolute; width:160px; height:600px; padding:0; margin:0; cursor:pointer;">
+
+	<div id="endFrame" style="position:absolute; width:160px; height:600px; top:0px; padding:0; margin:0;  visibility:hidden">
+    	<img src="endframe.png" style="position:absolute; width:160px; height:600px;" />
+    </div>
+
+	<div id="videoArea" style="position:absolute; width:160px; height:600px; padding:0; margin:0;">
+
+		<img src="poster.jpg" style="position:absolute;" />
+
+		<video id="video1" width="160" height="600" style="position:absolute; left:0px; top:0px;" poster="poster.jpg" autoplay muted controls>
+          <source src="video.mp4" type="video/mp4">
+          <!--<source src="movie.ogv" type="video/ogg">--> 
+    	</video>
+       
+	</div>
+    
+ 	<div style="position:absolute; padding:0; margin:0; background-color:rgba(204,204,204,1.00); left:0px; top:0px; width:160px; height:1px;"></div>
+	<div style="position:absolute; padding:0; margin:0; background-color:rgba(204,204,204,1.00); left:0px; top:599px; width:160px; height:1px;"></div>
+	<div style="position:absolute; padding:0; margin:0; background-color:rgba(204,204,204,1.00); left:0px; top:0px; width:1px; height:600px;"></div>
+	<div style="position:absolute; padding:0; margin:0; background-color:rgba(204,204,204,1.00); left:159px; top:0px; width:1px; height:600px;"></div>
+
+</div>
+
+  	<script>
+	
+		var video1 = document.getElementById('video1');
+		var videoArea = document.getElementById('videoArea');			
+		var endFrame = document.getElementById('endFrame');
+				
+		video1.addEventListener('ended', videoPlaybackEnded);		
+		video1.addEventListener('playing', videoPlaybackStarted);
+		
+		Enabler.loadModule(studio.module.ModuleId.VIDEO, function() {
+			studio.video.Reporter.attach('video_1', video1);
+		});
+							
+		function videoPlaybackEnded(e){
+			//video1.pause();
+			//video1.webkitExitFullScreen();
+			showEndFrame();
+		}
+		
+		function showEndFrame(){
+			if (video1.hasAttribute("controls")) {
+     			video1.removeAttribute("controls")   
+			}
+			video1.style.visibility='hidden';
+			videoArea.style.visibility='hidden';
+			
+			//endFrame.style.opacity = 0;			
+			//unfade(endFrame);
+						
+			endFrame.style.visibility='visible';
+			endFrame.addEventListener('click', clickThru);	
+		}
+		
+		function unfade(element) {
+		var op = 0.1;  // initial opacity
+		element.style.display = 'block';
+		var timer = setInterval(function () {
+			if (op >= 1){
+				clearInterval(timer);
+			}
+			element.style.opacity = op;
+			element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+			op += op * 0.1;
+		}, 10);
+		}
+		
+		function videoPlaybackStarted(e){
+			if (video1.hasAttribute("controls")) {
+     			video1.removeAttribute("controls")   
+			}			
+			videoArea.addEventListener('click', videoAreaClicked);				
+		}
+						
+		function videoAreaClicked(e){						
+			if(video1.paused){
+				//video1.play();				
+			  }	 else {
+				video1.pause();
+				showEndFrame();
+				clickThru();			
+			  }				
+		}
+			
+		function clickThru(){
+			console.log('clickThru');
+			Enabler.exit('Exit');
+		}
+			
+    </script>
+
+</body>
+</html>
