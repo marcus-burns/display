@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" name="ad.size" content="width=160,height=600">
+<title>160x600</title>
+
+<script src="https://s0.2mdn.net/ads/studio/cached_libs/createjs_2015.11.26_54e1c3722102182bb133912ad4442e19_min.js"></script>
+
+<script src="AB_QuietV_costs_SKY.js"></script>
+
+<!--<script src="https://s0.2mdn.net/ads/studio/Enabler.js"></script>-->
+
+<script>var DCS = false;
+// if DCS (DoubleClick Studio) is false, then the ad is setup for DCM (DoubleClick Manager).
+
+var clickTag = "http://www.dyson.com";
+
+var enableRetina = true;
+
+window.onload = function() {
+  if (Enabler.isInitialized()) {
+      enablerInitHandler();
+  } else {
+      Enabler.addEventListener(studio.events.StudioEvent.INIT,enablerInitHandler);
+  }
+}
+function enablerInitHandler() {
+    // Start ad, initialise animation, load in your image assets, call Enabler methods.
+    // Also, you can start the Polite Load.
+}
+function bgExitHandler(e) {
+      Enabler.exit('Background Exit');
+}
+</script>
+
+<script>
+var canvas, stage, exportRoot;
+
+function init() {
+	canvas = document.getElementById("canvas");
+	
+	// CLICK DETECTOR //
+	if(DCS==true){
+		canvas.addEventListener('click', bgExitHandler, false);
+	}else{
+		var a = document.getElementById("dcmExit");
+		a.href = "javascript:window.open(window.clickTag)";
+	}
+	
+	images = images||{};
+
+	var loader = new createjs.LoadQueue(false);
+	loader.addEventListener("fileload", handleFileLoad);
+	loader.addEventListener("complete", handleComplete);
+	loader.loadManifest(lib.properties.manifest);
+}
+
+function handleFileLoad(evt) {
+	if (evt.item.type == "image") { images[evt.item.id] = evt.result; }
+}
+
+function handleComplete() {
+	exportRoot = new lib.AB_QuietV_costs_SKY();
+
+	stage = new createjs.Stage(canvas);
+	
+	if(enableRetina==true){
+		if (window.devicePixelRatio) {
+			// grab the width and height from canvas
+			var height = canvas.getAttribute('height');
+			var width = canvas.getAttribute('width');
+			// reset the canvas width and height with window.devicePixelRatio applied
+			canvas.setAttribute('width', Math.round(width * window.devicePixelRatio));
+			canvas.setAttribute('height', Math.round( height * window.devicePixelRatio));
+			// force the canvas back to the original size using css
+			canvas.style.width = width+"px";
+			canvas.style.height = height+"px";
+			// set CreateJS to render scaled
+			stage.scaleX = stage.scaleY = window.devicePixelRatio;
+		}
+	}
+	
+	stage.addChild(exportRoot);
+	stage.update();
+
+	createjs.Ticker.setFPS(lib.properties.fps);
+	createjs.Ticker.addEventListener("tick", stage);
+}
+</script>
+</head>
+
+<body onload="init();" style="background-color:#D4D4D4; overflow:hidden; margin:0; padding:0;">
+	<a id="dcmExit">
+		<canvas id="canvas" width="160" height="600" style="background-color:#000000; cursor:pointer;"></canvas>
+    </a>
+</body>
+</html>
